@@ -1,0 +1,48 @@
+.layout-wrap{
+    height: 100%;
+    
+    .logo{
+        height: 70px;
+        display: flex;
+        img{
+            margin: auto;
+            width: 70%;
+        }
+    }
+    
+    // 左侧菜单
+    .ant-layout-sider,.ant-menu,.ant-menu-dark,.ant-menu-dark,.ant-menu-inline.ant-menu-sub{
+        background-color: #213262;
+    }
+    .ant-menu-item-selected{
+        background: #1890FF linear-gradient(315deg, #35FCFF 0%, #0443FC 100%);
+    }
+
+    .ant-layout-content{
+        min-height: auto;
+        // height: 100vh;
+    }
+
+    .ant-menu.ant-menu-dark{
+        background-color: transparent;
+    }
+    
+    .ant-menu-dark .ant-menu-inline.ant-menu-sub{
+        background-color: transparent;
+    }
+    
+    // 主要区域
+    .site-layout{
+        background-color:#F0F2F5; 
+        flex: 1;
+        .layout-conent{
+            // background-color: #fff;
+            
+            >div{
+                height: 100%;
+                width: revert;
+                overflow-x: auto;
+            }
+        }
+    }
+}
