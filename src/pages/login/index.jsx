@@ -35,7 +35,7 @@ export default memo(function () {
      * @param {object} values 
      */
     const onFinish = async values => {
-        // console.log('denlgu');
+        console.log('denlgu', values);
         // let res = await loginApi({ ...values, password: sha1(values.password) })
         // // console.log('res', res);
 
@@ -77,7 +77,7 @@ export default memo(function () {
                 </Dropdown> */}
             </header>
             <div className="login-box">
-                <h2 style={{ textAlign: 'center' }}>森森日记</h2>
+                <h2 style={{ textAlign: 'center' }}>管理系统</h2>
                 <Form
                     name="normal_login"
                     className="login-form"

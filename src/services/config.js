@@ -1,6 +1,6 @@
 // const devBaseURL = "https://www.fastmock.site/mock/94a0f2047d1702f65cd162e1a272f080/api/";
-const devBaseURL = "http://47.108.88.248:9601/api/v1/team";
-const proBaseURL = "https://apiv1-forest.fosuss.com/api/v1/team";
+const devBaseURL = "http://127.0.0.1:9501/platform/v1/";
+const proBaseURL = "http://127.0.0.1:9501/platform/v1/";
 
 
 export const BASE_URL = process.env.NODE_ENV === 'development' ? devBaseURL : proBaseURL;

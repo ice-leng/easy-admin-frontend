@@ -1,8 +1,8 @@
-import React, { memo, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom'
+import React, {memo, Suspense, useState} from 'react';
+import {Route, useHistory, useLocation} from 'react-router-dom'
 // import { useRecoilValue } from 'recoil'
-import { Layout, Menu } from 'antd';
-import { ShareAltOutlined, FileSearchOutlined, RiseOutlined, AreaChartOutlined } from '@ant-design/icons'
+import {Layout, Menu} from 'antd';
+import {ShareAltOutlined, FileSearchOutlined, RiseOutlined, AreaChartOutlined} from '@ant-design/icons'
 
 
 import Header from './layout-header'
@@ -11,7 +11,7 @@ import Header from './layout-header'
 import routersAll from '@/router'
 import routers from "@/router";
 import TbaleService from '@/common/constant/pro-table'
-import { useCreateRoutes } from '@/utils/utils'
+import {useCreateRoutes} from '@/utils/utils'
 import moment from 'moment'
 
 
@@ -19,13 +19,13 @@ import moment from 'moment'
 // import Logo from '@/assets/images/logo.png'
 import './index.less'
 
-const { Sider, Content } = Layout;
-const { SubMenu } = Menu;
+const {Sider, Content} = Layout;
+const {SubMenu} = Menu;
 const icons = {
-    'ShareAltOutlined': <ShareAltOutlined />,
-    'FileSearchOutlined': <FileSearchOutlined />,
-    'RiseOutlined': <RiseOutlined />,
-    'AreaChartOutlined': <AreaChartOutlined />,
+    'ShareAltOutlined': <ShareAltOutlined/>,
+    'FileSearchOutlined': <FileSearchOutlined/>,
+    'RiseOutlined': <RiseOutlined/>,
+    'AreaChartOutlined': <AreaChartOutlined/>,
 }
 
 export default memo(() => {
@@ -47,7 +47,7 @@ export default memo(() => {
 
     /**
      * 页面跳转
-     * @param {Object} item 
+     * @param {Object} item
      */
     const goto = async item => {
         setTimeout(() => {
@@ -278,7 +278,7 @@ export default memo(() => {
                 }
             }
             // 动态传参
-            history.push({ pathname: item.path, state });
+            history.push({pathname: item.path, state});
             sessionStorage.setItem('init-state', JSON.stringify(state));
         }, 100);
     }
@@ -286,7 +286,7 @@ export default memo(() => {
     return (
         <Layout className="layout-wrap">
             <Sider trigger={null} collapsible collapsed={collapsed}>
-                <div className="logo" >
+                <div className="logo">
 
                 </div>
                 {createMenu(routers, goto, location, currentPath)}
@@ -297,9 +297,11 @@ export default memo(() => {
                 </Header>
                 <Content
                     className="layout-conent site-layout-background"
-                    style={{ margin: '24px 16px 0' }}
+                    style={{margin: '24px 16px 0'}}
                 >
                     {useCreateRoutes(routers)}
+                    <Route path="/404" render={(routerData) => <Suspense
+                        fallback={<div>Loading...</div>}>404</Suspense>}/>
                 </Content>
             </Layout>
         </Layout>
@@ -311,24 +313,28 @@ export default memo(() => {
  * 创建菜单
  * @param {Array} routes 路由配置表
  * @param {Function} goto 页面跳转
- * @param {Object} location 
+ * @param {Object} location
  * @param {String} currentPath 当前路由
  */
 const createMenu = (routes, goto, location, currentPath) => {
 
     const parent = routersAll.find(item => item.children?.some(cItem => cItem.path === location.pathname))
     // 菜单默认选中为当前路由
-    return (<Menu theme="dark" mode="inline" multiple={true} defaultOpenKeys={[parent?.path]} selectedKeys={[currentPath || location.pathname]}>
+    return (<Menu theme="dark" mode="inline" multiple={true} defaultOpenKeys={[parent?.path]}
+                  selectedKeys={[currentPath || location.pathname]}>
         {
             routes.map(mItem => {
                 if (mItem.children) {
                     return (
                         <SubMenu key={mItem.path} title={mItem.title} icon={icons[mItem.icon]}>
-                            { mItem.children.map(item => !item.hidden && <Menu.Item key={item.path} onClick={() => goto(item)} icon={icons[item.icon]}>{item.title}</Menu.Item>)}
+                            {mItem.children.map(item => !item.hidden &&
+                                <Menu.Item key={item.path} onClick={() => goto(item)}
+                                           icon={icons[item.icon]}>{item.title}</Menu.Item>)}
                         </SubMenu>
                     )
                 } else {
-                    return !mItem.hidden ? <Menu.Item key={mItem.path} icon={icons[mItem.icon]} onClick={() => goto(mItem)}>{mItem.title}</Menu.Item> : null
+                    return !mItem.hidden ? <Menu.Item key={mItem.path} icon={icons[mItem.icon]}
+                                                      onClick={() => goto(mItem)}>{mItem.title}</Menu.Item> : null
                 }
             })
         }
