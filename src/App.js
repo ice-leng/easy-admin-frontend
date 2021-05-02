@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect, useEffect } from 'react';
 import { ConfigProvider } from 'antd';
 import { useHistory } from 'react-router-dom';
 
@@ -10,15 +10,18 @@ moment.locale('zh-cn');
 
 function App() {
     const history = useHistory()
-
+    const [lang] = useState(zhCN)
 
     useLayoutEffect(() => {
         const Authorization = localStorage.getItem('Authorization')
         !Authorization && history.replace('/login')
 
-    }, [history])
+        // 导航
+        if (Authorization) {
 
-    const [lang] = useState(zhCN)
+        }
+
+    }, [history])
 
     return (
         <ConfigProvider locale={lang}>

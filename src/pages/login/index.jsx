@@ -1,20 +1,17 @@
-import React, { memo, useState, useLayoutEffect } from 'react'
-import { Form, Input, Button, message, Spin, } from 'antd';
-import { UserOutlined, LockOutlined, } from '@ant-design/icons';
+import React, { memo, useState, useLayoutEffect, useEffect } from 'react'
+import { Form, Input, Button, message, Spin } from 'antd';
+import { UserOutlined, LockOutlined, BarcodeOutlined} from '@ant-design/icons';
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-// import { useSetRecoilState } from 'recoil'
 
-// import { currentRouters } from '@/store'
-import routersAll from '@/router'
-// import { getsectionListApi } from '@/services/global.js'
-// import { loginApi } from '@/services/login'
-// import sha1 from '@/utils/sha1'
+import routers from '@/router'
+import { loginApi } from '@/services/login'
+import { actions } from '@/components/layout/store/slice'
 import './style.less';
+import 'antd/dist/antd.css';
 
 
 export default memo(function () {
-
-
     const history = useHistory();
     // const setCurrentRouters = useSetRecoilState(currentRouters)
     const [loading, setLoading] = useState(false) //loading
@@ -27,7 +24,6 @@ export default memo(function () {
             history.replace('/')
         }
     }, [history])
-
 
 
     /**
@@ -90,22 +86,25 @@ export default memo(function () {
                         rules={[{ required: true, message: '请输入账号' }]}
                     >
                         <Input prefix={<UserOutlined className="site-form-item-icon" />}
-                            style={{ height: 40 }}
-                            size="middle"
-                            placeholder={'用户名'} />
+                               style={{ height: 40 }}
+                               size="middle"
+                               placeholder={'账号'} />
                     </Form.Item>
                     <Form.Item
                         name="password"
                         rules={[{ required: true, message: '请输入密码' }]}
                     >
                         <Input style={{ height: 40 }}
-                            prefix={<LockOutlined className="site-form-item-icon" />}
-                            type="password"
-                            placeholder={'密码'}
+                               prefix={<LockOutlined className="site-form-item-icon" />}
+                               type="password"
+                               placeholder={'密码'}
                         />
                     </Form.Item>
                     <Form.Item style={{ textAlign: 'center' }}>
+
                         <Button type="primary" htmlType="submit" onClick={() => { }} className="login-form-button" >登录</Button>
+
+
                     </Form.Item>
 
                 </Form>

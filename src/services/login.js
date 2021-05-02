@@ -11,6 +11,3 @@ export const loginOutApi = data => request({ url: '/login/logout', method: 'post
 
 /* 刷新token */
 export const loginRefreshApi = data => request({ url: '/login/refreshToken', method: 'post', data})
-
-/* 获取及更新验证码 */
-export const codeApi = data => request({ url: '/login/verifyCode', method: 'post', data})
