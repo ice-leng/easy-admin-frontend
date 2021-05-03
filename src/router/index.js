@@ -5,7 +5,8 @@ const routers = () => {
             key: "/dashboard",
             title: '统计数据',
             icon: 'AreaChartOutlined',
-            componentPath: "pages/protable",
+            actions: ["a", "b"],
+            componentPath: "pages/default",
             permanent: true,
             exact: true,
         },
@@ -14,7 +15,7 @@ const routers = () => {
             key: "/orders",
             title: '订单管理',
             icon: 'FileSearchOutlined',
-            componentPath: "",
+            componentPath: "pages/default",
             exact: true,
             children: [
                 {
@@ -22,7 +23,7 @@ const routers = () => {
                     key: '/orders/jd-list',
                     title: '京东订单',
                     icon: 'FileSearchOutlined',
-                    componentPath: 'pages/protable',
+                    componentPath: '',
                     section_id: 2,
                 },
             ]

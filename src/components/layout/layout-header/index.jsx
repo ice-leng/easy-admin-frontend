@@ -3,8 +3,8 @@ import { Breadcrumb, Space, Popconfirm, Menu, Dropdown, Modal, Form, Input, mess
 import { useHistory } from 'react-router-dom'
 import { SearchOutlined, BellOutlined, GithubOutlined, PoweroffOutlined, MenuUnfoldOutlined, DownOutlined } from '@ant-design/icons';
 import './index.less'
-// import { getProfileDetailApi, editUserPasswordApi } from "@/services/global.js";
-// import sha1 from '@/utils/sha1'
+import 'antd/dist/antd.css';
+import {loginOutApi} from '@/services/login'
 
 export default memo(function ({ routers, pathname, toggle }) {
 
@@ -49,7 +49,15 @@ export default memo(function ({ routers, pathname, toggle }) {
      * 退出登录
      */
     const logOut = () => {
-        localStorage.removeItem('Dense-Diary-team-Authorization');
+        loginOutApi({
+            token: localStorage.getItem("Authorization")
+        }).then((res)=>{
+            console.log('res', res)
+        })
+        localStorage.removeItem('Authorization');
+        localStorage.removeItem('username');
+        localStorage.removeItem('Router');
+        message.success("退出成功");
         history.push('/login')
     }
     const handleOk = () => {
